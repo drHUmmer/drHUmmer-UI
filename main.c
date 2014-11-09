@@ -1,6 +1,4 @@
-#include <xc.h>
 #include "main.h"
-#include "init.h"
 
 
 int main() {
