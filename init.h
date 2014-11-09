@@ -22,5 +22,8 @@
 #define ALL_OUTPUT  0x00;
 
 void init();
+void PORTinit();
+void SPIinit();
+void UARTinit();
 
 #endif // INIT_H

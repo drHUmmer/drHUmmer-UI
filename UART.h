@@ -4,7 +4,7 @@
 #include <xc.h>
 
 // Function prototype
-UARTsend(unsigned char data);
+void UARTsend (unsigned char data);
 
 #endif	// UART_H
 
