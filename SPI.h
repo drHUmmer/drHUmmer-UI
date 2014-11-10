@@ -1,11 +1,10 @@
 #ifndef SPI_H
 #define	SPI_H
 
-#include <xc.h>
-
-/* Initialization function is found in "init.h" */
+#include <pic16f724.h>
 
 // Function prototypes
+void SPIinit(void);
 void SPIsend(unsigned char data);
 
 #endif	// SPI_H

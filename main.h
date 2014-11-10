@@ -2,11 +2,16 @@
 #define MAIN_H
 
 // Includes
-#include <xc.h>
-#include "init.h"
+#include <pic16f724.h>
+#include "sysinit.h"
+#include "UART.h"
+#include "interrupt.h"
+#include "UIinfo.h"
+
+#include "SPI.h"
 
 // Defines
 
 // Typedefs
 
-#endif
+#endif // MAIN_H

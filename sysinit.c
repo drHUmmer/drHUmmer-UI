@@ -1,6 +1,6 @@
-#include "init.h"
+#include "sysinit.h"
 
-void init() {
+void SysInit(void) {
     PORTinit();
     SPIinit();
     UARTinit();
@@ -10,9 +10,9 @@ void init() {
     GIE     =   1;          // Global interrupt enable
 }
 
-void PORTinit() {
+void PORTinit(void) {
     SSSEL   =   0;          // CS (RA5)
-    ANSELA  =
+//    ANSELA  =
 
     // I/O setup
     TRISA0  =   INPUT;
@@ -26,7 +26,14 @@ void PORTinit() {
     // Port B
     WPUB    =   0x00;       // Weak pull-up disabled
     IOCB    =   0x00;       // Interrupt on change disabled
-    TRISB   =   ALL_INPUT;  // RE
+    TRISB0  =   INPUT;
+    TRISB1  =   INPUT;
+    TRISB2  =   INPUT;
+    TRISB3  =   INPUT;
+    TRISB4  =   INPUT;
+    TRISB5  =   INPUT;
+    TRISB6  =   INPUT;
+    TRISB7  =   INPUT;
 
     // Port C
     TRISC0  =   INPUT;      // RE
@@ -54,28 +61,6 @@ void PORTinit() {
     TRISE2  =   INPUT;      // RE
 }
 
-void UARTinit() {
-    SPBRG   =   416;        // Fosc / ( 4 * (SPBRG + 1) )
-                            // Baudrate = (Fosc / (4 * SPBRG)) - 1
-    TXEN    =   1;          // Enables transmitter
-    SYNC    =   1;          // Synchronous transmission
-    ADDEN   =   0;          // In sync. mode, must be set to 0
-}
 
-void SPIinit() {
-    // SPI Slave Mode
-    SMP     =   0;          // Setting must be cleared in Slave Mode
 
-    CKP     =   0;          // Idle state for clock is LOW
-    CKE     =   0;          // Data stable on FALLING EDGE
-    
-    SSPM0   =   0;          // Synchronous Serial Port Mode
-    SSPM1   =   0;          // "0100" = SPI Slave Mode,
-    SSPM2   =   1;          // clock = SCK,
-    SSPM3   =   0;          // SS pin enabled
 
-    SSPEN   =   1;          // Enables serial port and
-                            // configures SCK, SDI and SDO pins
-
-    SSPIE   =   1;          // Enable interrupt on data receive
-}

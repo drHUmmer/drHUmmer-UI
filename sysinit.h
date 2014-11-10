@@ -1,7 +1,10 @@
-#ifndef INIT_H
-#define INIT_H
+#ifndef SYSINIT_H
+#define SYSINIT_H
 
-#include <xc.h>
+// Includes
+#include <pic16f724.h>
+#include "SPI.h"
+#include "UART.h"
 
 // CONFIG1
 #pragma config FOSC     = INTOSCIO  // Oscillator Selection bits (INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O function on RA7/OSC1/CLKIN)
@@ -16,14 +19,12 @@
 // CONFIG2
 #pragma config VCAPEN   = RA6       // Voltage Regulator Capacitor Enable bits (VCAP functionality is enabled on RA6)
 
+// Defines
 #define INPUT       1
-#define ALL_INPUT   0xFF;
 #define OUTPUT      0
-#define ALL_OUTPUT  0x00;
 
-void init();
+// Function Prototypes
+void SysInit();
 void PORTinit();
-void SPIinit();
-void UARTinit();
 
-#endif // INIT_H
+#endif // SYSINIT_H
