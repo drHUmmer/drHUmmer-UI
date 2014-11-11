@@ -19,5 +19,9 @@ void SPIinit(void) {
 }
 
 void SPIsend (unsigned char data) {
-    SSPBUF = data;
+    SPI_DATA_REG    = data;
+}
+
+unsigned char SPIget (void) {
+    return SPI_DATA_REG;
 }

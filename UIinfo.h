@@ -1,23 +1,35 @@
 #ifndef UIINFO_H
 #define	UIINFO_H
 
-#include <pic16f724.h>
+//////////////////
+// Button Modes //
+//////////////////
+#define MOMENTARY   0
+#define TOGGLED     1
 
-// Button Modes
-#define LIVE        0
-#define PULSE       1
-
+////////////////////
+// Rotary Encoder //
+////////////////////
 typedef struct {
     signed char     value;          // Current value
+    unsigned char   prevValA : 1;
+    unsigned char   prevValB : 1;
 } RotaryEncoder_TypeDef;
-RotaryEncoder_TypeDef rotary_encoder_default = {0};
+RotaryEncoder_TypeDef rotary_encoder_default = {0,0,0};
 
+////////////
+// Button //
+////////////
 typedef struct {
     unsigned char   value   : 1;    // Self explanatory
+    unsigned char   prevVal : 1;    // Previous value
     unsigned char   mode    : 1;    // LIVE / PULSE
 } Button_TypeDef;
-Button_TypeDef button_default = {0,0};
+Button_TypeDef button_default = {0,0,0};
 
+////////
+// UI //
+////////
 typedef struct {
     Button_TypeDef  Butt_1;
     Button_TypeDef  Butt_2;
@@ -64,8 +76,6 @@ typedef struct {
     RotaryEncoder_TypeDef RE_10;
     RotaryEncoder_TypeDef RE_11;
 } UI_TypeDef;
-static UI_TypeDef UIinfo;
-
+UI_TypeDef UIinfo;
 
 #endif	// UIINFO_H
-
