@@ -8,20 +8,23 @@
 #define NR_OF_BUTTONS_REG   4
 #define NR_OF_ROTARYENC     11
 
-unsigned char   UIsendButton        (unsigned char address);
-signed char     UIsendRotaryEnc     (unsigned char address);
+////////////
+// Button //
+////////////
+void            updateButtons       (void);
+unsigned char   getButtonRegValue   (unsigned char registerNr);
+void            setButtonValue      (unsigned char buttonNr, unsigned char value);
+void            setButtonMode       (unsigned char buttonNr, ButtonMode_t mode);
+void            setButtonEdge       (unsigned char buttonNr, Edge_t edgeMode);
+void            resetButton         (unsigned char buttonNr);
+void            resetButtons        (void);
 
-// Reset
-void            UIresetButton       (void);
-void            UIresetRotaryEnc    (void);
-
-// Button
-void            UIgetButtonValues   (void);
-void            UIsetButtonValue    (unsigned char offset, unsigned char val);
-
-// Rotary Encoder
-void            UIgetRotEncValue    (unsigned char number);
-void            UIsetRotEncValue    (unsigned char offset, signed char val);
+////////////////////
+// Rotary Encoder //
+////////////////////
+void            updateRotaryEnc     (unsigned char REnr);
+signed char     getREvalue          (unsigned char REnr, unsigned char reset);
+void            resetRE             (unsigned char REnr);
+void            resetREs            (void);
 
 #endif	// UI_H
-

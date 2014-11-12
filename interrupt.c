@@ -13,8 +13,8 @@ void interrupt MainInterrupt () {
             // RESET //
             ///////////
             case COMMAND_RESET:
-                UIresetButton();
-                UIresetRotaryEnc();
+//                UIresetButton();
+//                UIresetRotaryEnc();
                 break;
 
             ////////////
@@ -22,14 +22,14 @@ void interrupt MainInterrupt () {
             ////////////
             case (COMMAND_BUTT):
                 if (address == 0) {
-                    unsigned char registerNr;
-                    for (registerNr = 1; registerNr <= NR_OF_BUTTONS_REG; registerNr ++) {
-                        SPIsend(UIsendButton(registerNr));
-                    }
+//                    unsigned char registerNr;
+//                    for (registerNr = 1; registerNr <= NR_OF_BUTTONS_REG; registerNr ++) {
+//                        SPIsend(UIsendButton(registerNr));
+//                    }
                 }
                 
                 else if (address > 0 && address <= NR_OF_BUTTONS_REG) {
-                    SPIsend(UIsendButton(address));
+//                    SPIsend(UIsendButton(address));
                 }
                 break;
                 
@@ -38,14 +38,14 @@ void interrupt MainInterrupt () {
             ////////////////////
             case (COMMAND_RE):
                 if (address == 0) {
-                    unsigned char registerNr;
-                    for (registerNr = 1; registerNr <= NR_OF_ROTARYENC; registerNr ++) {
-                        SPIsend(UIsendRotaryEnc(registerNr));
-                    }
+//                    unsigned char registerNr;
+//                    for (registerNr = 1; registerNr <= NR_OF_ROTARYENC; registerNr ++) {
+//                        SPIsend(UIsendRotaryEnc(registerNr));
+//                    }
                 }
                 
                 else if (address > 0 && address <= NR_OF_ROTARYENC) {
-                    SPIsend(UIsendRotaryEnc(address));
+//                    SPIsend(UIsendRotaryEnc(address));
                 }
                 break;
             default:    break;
