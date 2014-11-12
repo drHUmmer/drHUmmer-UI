@@ -18,41 +18,41 @@
 ///////////////////////////////
 // Button Location in Struct //
 ///////////////////////////////
-#define SEQ_16           0  // MSB
-#define SEQ_15           1  // Register 2
-#define SEQ_14           2
-#define SEQ_13           3
-#define SEQ_12           4
-#define SEQ_11           5
-#define SEQ_10           6
-#define SEQ_9            7
-
-#define SEQ_8            8  // MSB
-#define SEQ_7            9  // Register 1
-#define SEQ_6           10
-#define SEQ_5           11
-#define SEQ_4           12
-#define SEQ_3           13
-#define SEQ_2           14
-#define SEQ_1           15  // LSB
-
-#define BUTT_CLEAR      16  // MSB
-#define BUTT_PLAY       17  // Register 3
-#define BUTT_DRUM_6     18
-#define BUTT_DRUM_5     19
-#define BUTT_DRUM_4     20
-#define BUTT_DRUM_3     21
-#define BUTT_DRUM_2     22
-#define BUTT_DRUM_1     23  // LSB
-
-#define BUTT_EXTRA_1    24  // MSB
-#define BUTT_EXTRA_2    25  // Register 4
-#define BUTT_MENU_2     26
-#define BUTT_MENU_1     27
-#define BUTT_FX         28
-#define BUTT_PATT_LEN   29
-#define BUTT_PATT_SEL   30
-#define BUTT_SHIFT      31  // LSB
+//#define SEQ_16           0  // MSB
+//#define SEQ_15           1  // Register 2
+//#define SEQ_14           2
+//#define SEQ_13           3
+//#define SEQ_12           4
+//#define SEQ_11           5
+//#define SEQ_10           6
+//#define SEQ_9            7
+//
+//#define SEQ_8            8  // MSB
+//#define SEQ_7            9  // Register 1
+//#define SEQ_6           10
+//#define SEQ_5           11
+//#define SEQ_4           12
+//#define SEQ_3           13
+//#define SEQ_2           14
+//#define SEQ_1           15  // LSB
+//
+//#define BUTT_CLEAR      16  // MSB
+//#define BUTT_PLAY       17  // Register 3
+//#define BUTT_DRUM_6     18
+//#define BUTT_DRUM_5     19
+//#define BUTT_DRUM_4     20
+//#define BUTT_DRUM_3     21
+//#define BUTT_DRUM_2     22
+//#define BUTT_DRUM_1     23  // LSB
+//
+//#define BUTT_EXTRA_1    24  // MSB
+//#define BUTT_EXTRA_2    25  // Register 4
+//#define BUTT_MENU_2     26
+//#define BUTT_MENU_1     27
+//#define BUTT_FX         28
+//#define BUTT_PATT_LEN   29
+//#define BUTT_PATT_SEL   30
+//#define BUTT_SHIFT      31  // LSB
 
 //////////////////////////////
 // Rotary Encoders Location //

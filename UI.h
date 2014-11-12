@@ -22,9 +22,9 @@ void            resetButtons        (void);
 ////////////////////
 // Rotary Encoder //
 ////////////////////
+void            updateAllRotaryEnc  (void);
 void            updateRotaryEnc     (unsigned char REnr);
 signed char     getREvalue          (unsigned char REnr, unsigned char reset);
-void            resetRE             (unsigned char REnr);
 void            resetREs            (void);
 
 #endif	// UI_H
