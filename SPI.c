@@ -19,9 +19,13 @@ void SPIinit(void) {
 }
 
 void SPIsend (unsigned char data) {
+    // IMPLENENT:
+    // While BF bit is set in SSPSTAT. Wait
+    while (BF == 1);
     SPI_DATA_REG    = data;
 }
 
 unsigned char SPIget (void) {
+    
     return SPI_DATA_REG;
 }

@@ -49,7 +49,7 @@ void PORTinit(void) {
     TRISD0  =   INPUT;      // Button Input
     TRISD1  =   OUTPUT;     // Button Load
     TRISD2  =   OUTPUT;     // Button Clock
-    TRISD3  =   OUTPUT;     // N.C.
+    TRISD3  =   OUTPUT;     // Program LED blink
     TRISD4  =   INPUT;      // RE
     TRISD5  =   INPUT;      // RE
     TRISD6  =   INPUT;      // RE

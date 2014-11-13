@@ -3,9 +3,15 @@
 int main() {
 
     SysInit();
-    //UI.Butt_1.mode  =   PULSE;
-    //UI.Butt_1.value =   0;
 
-    while (1);
+    while (69) {
+        PORTD |= 1<<3;
+
+        updateAllRotaryEnc();
+        updateButtons();
+
+        PORTD &= 1<<3;
+    }
+
     return 1;
 }
