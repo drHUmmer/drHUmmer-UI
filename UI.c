@@ -127,6 +127,8 @@ void updateAllRotaryEnc (void) {
     for (counter = 1; counter <= NR_OF_ROTARYENC; counter ++) {
         updateRotaryEnc(counter);
     }
+
+    return;
 }
 
 void updateRotaryEnc (unsigned char REnr) {
@@ -192,16 +194,13 @@ void updateRotaryEnc (unsigned char REnr) {
             break;
     }
 
-    valA = !!(valA);                    // Move data to the
-    valB = !!(valB);                    // first bit of the byte
-
-    if (prevValA == 0 && prevValB == 0) {
-        if (valA == 1 || valB == 1) {
-            if (valA == 1 && valB == 0){
-                RE->value += 1;
+    if (!(prevValA) && !(prevValB)) {
+        if (valA || valB) {
+            if (valA && !(valB)){
+                RE->value ++;
             }
-            else if (valA == 0 && valB == 1) {
-                RE->value -= 1;
+            else if (!(valA) && valB) {
+                RE->value --;
             }
             // else do nothing
         }

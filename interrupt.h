@@ -2,7 +2,6 @@
 #define	INTERRUPT_H
 
 #include <pic16f724.h>
-#include <stdio.h>
 #include "UI.h"
 
 // Command list         //
