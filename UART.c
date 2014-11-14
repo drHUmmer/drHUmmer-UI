@@ -1,14 +1,15 @@
 #include "UART.h"
 
-void UARTinit() {
-    SPBRG   =   416;        // Fosc / ( 4 * (SPBRG + 1) )
-                            // Baudrate = (Fosc / (4 * SPBRG)) - 1
+void UARTinit(void) {
+    SPBRG   =   17;         // 25 for 9600 @16MHz, with BRGH = 0
+    BRGH    =   1;          // High speed
+
     TXEN    =   1;          // Enables transmitter
-    SYNC    =   1;          // Synchronous transmission
-    ADDEN   =   0;          // In sync. mode, must be set to 0
+    SYNC    =   0;          // Asynchronous transmission
+    SPEN    =   1;
 }
 
 void UARTsend (unsigned char data) {
     while (TRMT == 0);  // Wait till previous transfer is complete
-    TXREG = data;       // Send data to UART buffer
+    TXREG   =   data;
 }

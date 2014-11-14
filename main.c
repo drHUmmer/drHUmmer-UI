@@ -2,8 +2,9 @@
 
 int main() {
     SysInit();
-
+    
     while (1) {
+        
         PORTD |= (1<<3);        // Set debug pin
         
         updateAllRotaryEnc();   // Read all Rotary encoders
