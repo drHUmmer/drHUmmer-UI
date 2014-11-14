@@ -46,10 +46,10 @@ void updateButtons (void) {
 
         // Clock pulse
         BUTTON_CLOCK_PORT |= BUTTON_CLOCK_BIT;
-        BUTTON_CLOCK_PORT &= BUTTON_CLOCK_BIT;
+        BUTTON_CLOCK_PORT &= ~(BUTTON_CLOCK_BIT);
     }
 
-    BUTTON_LOAD_PORT &= BUTTON_LOAD_BIT;
+    BUTTON_LOAD_PORT &= ~(BUTTON_LOAD_BIT);
 }
 
 unsigned char getButtonRegValue (unsigned char registerNr) {
@@ -122,7 +122,7 @@ void resetButton (unsigned char buttonNr) {
 // Rotary Encoder //
 ////////////////////
 void updateAllRotaryEnc (void) {
-    unsigned char counter = 0;
+    unsigned char counter;
 
     for (counter = 1; counter <= NR_OF_ROTARYENC; counter ++) {
         updateRotaryEnc(counter);
@@ -135,16 +135,15 @@ void updateRotaryEnc (unsigned char REnr) {
         return;
     }
 
-    RotaryEncoder_t* RE = &UIinfo.RE_1;
+    RotaryEncoder_t* RE = &UIinfo.RE_1 + REnr - 1;
+
     unsigned char valA  = 0;
     unsigned char valB  = 0;
-    unsigned char prevValA = 0;
-    unsigned char prevValB = 0;
+    unsigned char prevValA = RE->prevValA;
+    unsigned char prevValB = RE->prevValB;
 
-    RE += REnr - 1;
-
-    prevValA = RE->prevValA;
-    prevValB = RE->prevValB;
+//    valA = RE_1_A;
+//    valB = RE_1_B;
 
     switch (REnr) {
         case 1:
@@ -219,11 +218,9 @@ signed char getREvalue (unsigned char REnr, unsigned char reset) {
         return 0;                               // RETURN //
     }
     
-    signed char returnValue = 0;
-    RotaryEncoder_t* RE = &UIinfo.RE_1;
-    RE += REnr - 1;
+    RotaryEncoder_t* RE = &UIinfo.RE_1 + REnr - 1;
 
-    returnValue = RE->value;
+    signed char returnValue = RE->value;
 
     if (reset) {
         RE->value = 0;

@@ -2,17 +2,21 @@
 
 void SysInit(void) {
     PORTinit();
-    SPIinit();
-    UARTinit();
+    //SPIinit();
+    //UARTinit();
+
+    // PLL (switch from 2 MHz to 16 MHz)
+    // PLL enabled with CONFIG setting
+    IRCF0   =   1;
+    IRCF1   =   1;
 
     // Interrupt
     PEIE    =   1;          // Enable internal interrupts
-    GIE     =   1;          // Global interrupt enable
+    //GIE     =   1;          // Global interrupt enable
 }
 
 void PORTinit(void) {
     SSSEL   =   0;          // CS (RA5)
-//    ANSELA  =
 
     // I/O setup
     TRISA0  =   INPUT;
@@ -21,7 +25,7 @@ void PORTinit(void) {
     TRISA3  =   INPUT;      // RE
     TRISA4  =   INPUT;      // RE
     TRISA5  =   INPUT;      // RE
-    TRISA7  =   OUTPUT;     // N.C.
+    TRISA7  =   OUTPUT;     // Debug 1
 
     // Port B
     WPUB    =   0x00;       // Weak pull-up disabled
@@ -46,10 +50,11 @@ void PORTinit(void) {
     TRISC7  =   INPUT;      // RE
 
     // Port D
+    CPSON   =   0;          // No capacitive touch
     TRISD0  =   INPUT;      // Button Input
     TRISD1  =   OUTPUT;     // Button Load
     TRISD2  =   OUTPUT;     // Button Clock
-    TRISD3  =   OUTPUT;     // Program LED blink
+    TRISD3  =   OUTPUT;     // Debug 2
     TRISD4  =   INPUT;      // RE
     TRISD5  =   INPUT;      // RE
     TRISD6  =   INPUT;      // RE
@@ -60,7 +65,3 @@ void PORTinit(void) {
     TRISE1  =   INPUT;      // RE
     TRISE2  =   INPUT;      // RE
 }
-
-
-
-
