@@ -4,13 +4,13 @@
 ////////////
 // Button //
 ////////////
-void setButtonValue (unsigned char buttonNr, unsigned char value) {
-    if (!(buttonNr > 0 && buttonNr <= 8 * NR_OF_BUTTONS_REG)) {
+void setButtonValue (Buttons_t buttonNr, unsigned char value) {
+    if (!(buttonNr >= 0 && buttonNr < 8 * NR_OF_BUTTONS_REG)) {
         return;                             // RETURN //
     }
     Button_t* button = &UIinfo.Butt_1;
 
-    button += buttonNr - 1;                 // Jump to correct button address
+    button += buttonNr;                     // Jump to correct button address
 
     // Momentary
     if (button->mode == MOMENTARY) {
@@ -41,7 +41,7 @@ void updateButtons (void) {
     BUTTON_LOAD_PORT |= BUTTON_LOAD_BIT;
 
     unsigned char counter = 0;
-    for (counter = 1; counter <= NR_OF_BUTTONS_REG * 8; counter ++) {
+    for (counter = 0; counter < NR_OF_BUTTONS_REG * 8; counter ++) {
         setButtonValue(counter, !!(BUTTON_IN_PORT & BUTTON_IN_BIT));
 
         // Clock pulse
@@ -78,10 +78,10 @@ unsigned char getButtonRegValue (unsigned char registerNr) {
     return returnValue;                     // RETURN //
 }
 
-void setButtonMode (unsigned char buttonNr, ButtonMode_t mode) {
-    if (buttonNr > 0 && buttonNr <= 8 * NR_OF_BUTTONS_REG) {
+void setButtonMode (Buttons_t buttonNr, ButtonMode_t mode) {
+    if ((buttonNr >= 0) && (buttonNr < 8 * NR_OF_BUTTONS_REG)) {
         Button_t* button = &UIinfo.Butt_1;
-        button += buttonNr - 1;                 // Jump to correct button address
+        button += buttonNr;                     // Jump to correct button address
 
         button->mode = mode;
     }
@@ -89,31 +89,31 @@ void setButtonMode (unsigned char buttonNr, ButtonMode_t mode) {
     return;                                     // RETURN //
 }
 
-void setButtonEdge (unsigned char buttonNr, Edge_t mode) {
-    if (!(buttonNr > 0 && buttonNr <= 8 * NR_OF_BUTTONS_REG)) {
+void setButtonEdge (Buttons_t buttonNr, Edge_t mode) {
+    if (!(buttonNr >= 0 && buttonNr < 8 * NR_OF_BUTTONS_REG)) {
         return;                                 // RETURN //
     }
 
     Button_t* button = &UIinfo.Butt_1;
-    button += buttonNr - 1;                 // Jump to correct button address
+    button += buttonNr;                     // Jump to correct button address
 
     button->edge = mode;
 }
 
 void resetButtons (void) {
     unsigned char counter = 0;
-    for (counter = 1; counter <= NR_OF_BUTTONS_REG; counter ++) {
+    for (counter = 0; counter <= NR_OF_BUTTONS_REG - 1; counter ++) {
         resetButton(counter);
     }
 }
 
-void resetButton (unsigned char buttonNr) {
-    if (!(buttonNr > 0 && buttonNr <= NR_OF_BUTTONS_REG)) {
+void resetButton (Buttons_t buttonNr) {
+    if (!(buttonNr >= 0 && buttonNr < NR_OF_BUTTONS_REG)) {
         return;                                 // RETURN //
     }
     
     Button_t* button = &UIinfo.Butt_1;
-    button += buttonNr - 1;
+    button += buttonNr;
 
     button->value   = 0;
     button->prevVal = 0;

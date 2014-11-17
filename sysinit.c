@@ -19,7 +19,7 @@ void PORTinit(void) {
     SSSEL   =   0;          // CS (RA5)
 
     // I/O setup
-    ANSELA  =   0x00;       // Set asDigital I/O
+    ANSELA  =   0x00;       // Set as Digital I/O
     TRISA0  =   INPUT;
     TRISA1  =   INPUT;      // RE
     TRISA2  =   INPUT;      // RE
@@ -31,7 +31,7 @@ void PORTinit(void) {
     // Port B
     WPUB    =   0x00;       // Weak pull-up disabled
     IOCB    =   0x00;       // Interrupt on change disabled
-    ANSELB  =   0x00;       // Set asDigital I/O
+    ANSELB  =   0x00;       // Set as Digital I/O
     TRISB0  =   INPUT;
     TRISB1  =   INPUT;
     TRISB2  =   INPUT;
@@ -53,7 +53,7 @@ void PORTinit(void) {
 
     // Port D
     CPSON   =   0x00;       // No capacitive touch
-    ANSELD  =   0x00;       // Set asDigital I/O
+    ANSELD  =   0x00;       // Set as Digital I/O
     TRISD0  =   INPUT;      // Button Input
     TRISD1  =   OUTPUT;     // Button Load
     TRISD2  =   OUTPUT;     // Button Clock

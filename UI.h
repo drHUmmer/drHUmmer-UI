@@ -13,10 +13,10 @@
 ////////////
 void            updateButtons       (void);
 unsigned char   getButtonRegValue   (unsigned char registerNr);
-void            setButtonValue      (unsigned char buttonNr, unsigned char value);
-void            setButtonMode       (unsigned char buttonNr, ButtonMode_t mode);
-void            setButtonEdge       (unsigned char buttonNr, Edge_t edgeMode);
-void            resetButton         (unsigned char buttonNr);
+void            setButtonValue      (Buttons_t buttonNr, unsigned char value);
+void            setButtonMode       (Buttons_t buttonNr, ButtonMode_t mode);
+void            setButtonEdge       (Buttons_t buttonNr, Edge_t edgeMode);
+void            resetButton         (Buttons_t buttonNr);
 void            resetButtons        (void);
 
 ////////////////////
