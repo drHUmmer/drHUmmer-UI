@@ -2,15 +2,13 @@
 
 int main() {
     SysInit();
+    ButtonSettingSetup();       // Default button modes
     
     while (1) {
-        
         PORTD |= (1<<3);        // Set debug pin
         
         updateAllRotaryEnc();   // Read all Rotary encoders
         updateButtons();        // Read all button
-
-//        UARTsend(getREvalue(11, 0));
 
         PORTD &= ~(1<<3);       // Clear debug pin
     }

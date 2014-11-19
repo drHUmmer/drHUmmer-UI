@@ -24,7 +24,8 @@
 #define OUTPUT      0
 
 // Function Prototypes
-void SysInit();
-void PORTinit();
+void    SysInit             (void);
+void    PORTinit            (void);
+void    ButtonSettingSetup  (void);
 
 #endif // SYSINIT_H

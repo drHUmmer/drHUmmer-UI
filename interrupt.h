@@ -2,6 +2,7 @@
 #define	INTERRUPT_H
 
 #include <pic16f724.h>
+#include "interruptFunctions.h"
 #include "UI.h"
 
 // Command list         //
@@ -12,7 +13,7 @@
 //#define SPI_COMMAND_SIZE    3                   // bits
 //#define SPI_ADDR_SIZE       (8 - COMMAND_SIZE)  // bits
 
-#define COMMAND_MASK        0xE0                // 1110 0000
+#define COMMAND_MASK        0b11100000          // 1110 0000
 #define ADDR_MASK           0x1F                // 0001 1111
 
 #define DUMMY_DATA              0x00
@@ -24,10 +25,7 @@
 #define COMMAND_BUTT_MODE       (0b10100000)    // 101
 
 void interrupt MainInterrupt (void);
-void setButtonEdgeINT   (unsigned char address, Edge_t mode);
-void setButtonModeINT   (unsigned char address, ButtonMode_t mode);
-void clearInterruptData (void);
-void shiftInterruptData (void);
+
 
 typedef struct {
     unsigned char   data1;
@@ -43,9 +41,6 @@ typedef struct {
     unsigned char   data11;
     unsigned char   data12;
     unsigned char   data13;
-    unsigned char   data14;
-    unsigned char   data15;
-    unsigned char   data16;
 } InterruptData_t;
 InterruptData_t InterruptData;
 
