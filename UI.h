@@ -12,7 +12,7 @@
 // Button //
 ////////////
 void            updateButtons       (void);
-unsigned char   getButtonRegValue   (unsigned char registerNr);
+unsigned char   getButtonRegValue   (unsigned char registerNr, unsigned char reset);
 void            setButtonValue      (Buttons_t buttonNr, unsigned char value);
 void            setButtonMode       (Buttons_t buttonNr, ButtonMode_t mode);
 void            setButtonEdge       (Buttons_t buttonNr, Edge_t edgeMode);

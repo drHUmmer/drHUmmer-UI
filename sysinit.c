@@ -5,7 +5,7 @@ void SysInit(void) {
     SPIinit();
     UARTinit();
 
-    // PLL (switch from 2 MHz to 16 MHz)
+    // PLL (switch from 8 MHz to 16 MHz)
     // PLL enabled with CONFIG setting
     IRCF0   =   1;
     IRCF1   =   1;
@@ -20,12 +20,13 @@ void PORTinit(void) {
 
     // I/O setup
     ANSELA  =   0x00;       // Set as Digital I/O
+    ANSA5   =   1;          // SPI CS as analog input (NEEDED FOR SPI)
     TRISA0  =   INPUT;
     TRISA1  =   INPUT;      // RE
     TRISA2  =   INPUT;      // RE
     TRISA3  =   INPUT;      // RE
     TRISA4  =   INPUT;      // RE
-    TRISA5  =   INPUT;      // RE
+    TRISA5  =   INPUT;      // SPI CS
     TRISA7  =   OUTPUT;     // Debug 1
 
     // Port B
@@ -46,8 +47,8 @@ void PORTinit(void) {
     TRISC1  =   INPUT;      // RE
     TRISC2  =   INPUT;      // RE
     TRISC3  =   INPUT;      // SPI Clock
-    TRISC4  =   INPUT;      // SPI MOSI
-    TRISC5  =   OUTPUT;     // SPI MISO
+    TRISC4  =   INPUT;      // SPI MOSI SDI SDA
+    TRISC5  =   OUTPUT;     // SPI MISO SDO
     TRISC6  =   OUTPUT;     // UART TX (DEBUG)
     TRISC7  =   INPUT;      // RE
 

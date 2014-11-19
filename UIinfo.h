@@ -32,7 +32,7 @@ typedef struct {
     unsigned char   value   : 1;    // Self explanatory
     unsigned char   prevVal : 1;    // Previous value
     unsigned char   edge    : 1;    // Falling or rising edge
-    char   mode    : 1;    // ButtonMode_t
+    unsigned char   mode    : 1;    // ButtonMode_t
 } Button_t;
 Button_t button_default = {0,0,0,0};
 

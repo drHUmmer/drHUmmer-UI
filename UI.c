@@ -52,7 +52,7 @@ void updateButtons (void) {
     BUTTON_LOAD_PORT &= ~(BUTTON_LOAD_BIT);
 }
 
-unsigned char getButtonRegValue (unsigned char registerNr) {
+unsigned char getButtonRegValue (unsigned char registerNr, unsigned char reset) {
     if (!(registerNr > 0 && registerNr <= NR_OF_BUTTONS_REG)) {
         return 0;                           // RETURN //
     }
@@ -72,6 +72,9 @@ unsigned char getButtonRegValue (unsigned char registerNr) {
 
     for (counter = 0; counter < 8; counter ++) {
         returnValue |= button->value << 7 - counter;
+        if (button->mode == TOGGLED && reset) {
+            button->value = 0;
+        }
         button ++;
     }
 
