@@ -9,7 +9,7 @@ void SysInit(void) {
     PORTinit();
     SPIinit();
     UARTinit();
-    RingBufferInit();
+//    RingBufferInit();
 
 //    clearInterruptData();
 

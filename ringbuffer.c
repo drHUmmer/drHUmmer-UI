@@ -15,11 +15,11 @@ void RingBufferInit() {
 void RingBufferPush(RingBuffer_t *buffer, unsigned char data) {
     unsigned char next = (unsigned char)(buffer->head + 1) % BUFFER_SIZE;
 
-//    if(next != buffer->tail)
-//    {
+    if(next != buffer->tail)
+    {
         buffer->buffer[buffer->head] = data;
         buffer->head = next;
-//    }
+    }
 }
 
 unsigned char RingBufferPull(RingBuffer_t *buffer) {
