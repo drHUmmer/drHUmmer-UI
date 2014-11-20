@@ -1,34 +1,5 @@
 #include "interruptFunctions.h"
 
-void command_butt_get  (unsigned char address) {
-    RingBufferSync(interruptDataBuf_p);
-    
-    if (address == 0x00) { // Send all registers
-        RingBufferPush(interruptDataBuf_p, getButtonRegValue(1));
-        RingBufferPush(interruptDataBuf_p, getButtonRegValue(2));
-        RingBufferPush(interruptDataBuf_p, getButtonRegValue(3));
-        RingBufferPush(interruptDataBuf_p, getButtonRegValue(4));
-    }
-    else { // Specific register
-        RingBufferPush(interruptDataBuf_p, getButtonRegValue(address));
-    }
-}
-
-void command_re_get    (unsigned char address) {
-    RingBufferSync(interruptDataBuf_p);
-    
-    if (address == 0x00) { // Send all registers
-        unsigned char counter;
-        for (counter = 0; counter < NR_OF_ROTARYENC; counter ++) {
-            RingBufferPush(interruptDataBuf_p, getREvalue(counter));
-        }
-    }
-    else {
-        // Specific register
-        RingBufferPush(interruptDataBuf_p, getREvalue(address - 1));
-    }
-}
-
 void command_butt_edge (unsigned char address) {
     unsigned edge       = !!(address & 0x10);
     address             &= (address - 1);
@@ -299,37 +270,3 @@ void setButtonModeINT (unsigned char address, ButtonMode_t mode) {
             break;
     }
 }
-
-
-//void clearInterruptData(void) {
-//    InterruptData.data1     = DUMMY_DATA;
-//    InterruptData.data2     = DUMMY_DATA;
-//    InterruptData.data3     = DUMMY_DATA;
-//    InterruptData.data4     = DUMMY_DATA;
-//    InterruptData.data5     = DUMMY_DATA;
-//    InterruptData.data6     = DUMMY_DATA;
-//    InterruptData.data7     = DUMMY_DATA;
-//    InterruptData.data8     = DUMMY_DATA;
-//    InterruptData.data9     = DUMMY_DATA;
-//    InterruptData.data10    = DUMMY_DATA;
-//    InterruptData.data11    = DUMMY_DATA;
-//    InterruptData.data12    = DUMMY_DATA;
-//    InterruptData.data13    = DUMMY_DATA;
-//}
-//
-//void shiftInterruptData(void) {
-//    InterruptData.data1     = InterruptData.data2;
-//    InterruptData.data2     = InterruptData.data3;
-//    InterruptData.data3     = InterruptData.data4;
-//    InterruptData.data4     = InterruptData.data5;
-//    InterruptData.data5     = InterruptData.data6;
-//    InterruptData.data6     = InterruptData.data7;
-//    InterruptData.data7     = InterruptData.data8;
-//    InterruptData.data8     = InterruptData.data9;
-//    InterruptData.data9     = InterruptData.data10;
-//    InterruptData.data10    = InterruptData.data11;
-//    InterruptData.data11    = InterruptData.data12;
-//    InterruptData.data12    = InterruptData.data13;
-//    InterruptData.data13    = DUMMY_DATA;
-//}
-
