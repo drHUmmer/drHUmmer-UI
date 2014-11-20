@@ -1,37 +1,31 @@
 #include "interruptFunctions.h"
 
 void command_butt_get  (unsigned char address) {
+    RingBufferSync(interruptDataBuf_p);
+    
     if (address == 0x00) { // Send all registers
-        clearInterruptData();
-        InterruptData.data1     = getButtonRegValue(1, 1);
-        InterruptData.data2     = getButtonRegValue(2, 1);
-        InterruptData.data3     = getButtonRegValue(3, 1);
-        InterruptData.data4     = getButtonRegValue(4, 1);
+        RingBufferPush(interruptDataBuf_p, getButtonRegValue(1));
+        RingBufferPush(interruptDataBuf_p, getButtonRegValue(2));
+        RingBufferPush(interruptDataBuf_p, getButtonRegValue(3));
+        RingBufferPush(interruptDataBuf_p, getButtonRegValue(4));
     }
     else { // Specific register
-        clearInterruptData();
-        InterruptData.data1     = getButtonRegValue(address, 1);
+        RingBufferPush(interruptDataBuf_p, getButtonRegValue(address));
     }
 }
 
 void command_re_get    (unsigned char address) {
+    RingBufferSync(interruptDataBuf_p);
+    
     if (address == 0x00) { // Send all registers
-        clearInterruptData();
-        InterruptData.data1     = getREvalue(1, 1);
-        InterruptData.data2     = getREvalue(2, 1);
-        InterruptData.data3     = getREvalue(3, 1);
-        InterruptData.data4     = getREvalue(4, 1);
-        InterruptData.data5     = getREvalue(5, 1);
-        InterruptData.data6     = getREvalue(6, 1);
-        InterruptData.data7     = getREvalue(7, 1);
-        InterruptData.data8     = getREvalue(8, 1);
-        InterruptData.data9     = getREvalue(9, 1);
-        InterruptData.data10    = getREvalue(10, 1);
-        InterruptData.data11    = getREvalue(11, 1);
+        unsigned char counter;
+        for (counter = 0; counter < NR_OF_ROTARYENC; counter ++) {
+            RingBufferPush(interruptDataBuf_p, getREvalue(counter));
+        }
     }
-    else { // Specific register
-        clearInterruptData();
-        InterruptData.data1     = getREvalue(address, 1);
+    else {
+        // Specific register
+        RingBufferPush(interruptDataBuf_p, getREvalue(address - 1));
     }
 }
 
@@ -52,43 +46,6 @@ void command_butt_mode (unsigned char address) {
 void command_reset     (void) {
     resetButtons();
     resetREs();
-}
-
-void command_re_update (void) {
-    unsigned char work, counter;
-    
-    UARTsend(0xA5);
-    clearInterruptData();
-
-    work = 0x00;
-    work |= (!!(getREvalue(1, 0)) << 0);
-    work |= (!!(getREvalue(2, 0)) << 1);
-    work |= (!!(getREvalue(3, 0)) << 2);
-    work |= (!!(getREvalue(4, 0)) << 3);
-    work |= (!!(getREvalue(5, 0)) << 4);
-    work |= (!!(getREvalue(6, 0)) << 5);
-    work |= (!!(getREvalue(7, 0)) << 6);
-    work |= (!!(getREvalue(8, 0)) << 7);
-
-    InterruptData.data1 = work;
-
-    work = 0x00;
-    work |= (!!(getREvalue(9, 0)) << 0);
-    work |= (!!(getREvalue(10, 0)) << 1);
-    work |= (!!(getREvalue(11, 0)) << 2);
-
-    InterruptData.data2 = work;
-
-    char* intData       = &InterruptData.data3;
-
-    // Send the registers with a value (not zero)
-    for (counter = 1; counter <= NR_OF_ROTARYENC; counter ++) {
-        char REvalue = getREvalue(counter, 1);
-        if (REvalue) {
-            *intData = REvalue;
-            intData ++;
-        }
-    }
 }
 
 void setButtonEdgeINT (unsigned char address, Edge_t edge) {
@@ -344,35 +301,35 @@ void setButtonModeINT (unsigned char address, ButtonMode_t mode) {
 }
 
 
-void clearInterruptData(void) {
-    InterruptData.data1     = DUMMY_DATA;
-    InterruptData.data2     = DUMMY_DATA;
-    InterruptData.data3     = DUMMY_DATA;
-    InterruptData.data4     = DUMMY_DATA;
-    InterruptData.data5     = DUMMY_DATA;
-    InterruptData.data6     = DUMMY_DATA;
-    InterruptData.data7     = DUMMY_DATA;
-    InterruptData.data8     = DUMMY_DATA;
-    InterruptData.data9     = DUMMY_DATA;
-    InterruptData.data10    = DUMMY_DATA;
-    InterruptData.data11    = DUMMY_DATA;
-    InterruptData.data12    = DUMMY_DATA;
-    InterruptData.data13    = DUMMY_DATA;
-}
-
-void shiftInterruptData(void) {
-    InterruptData.data1     = InterruptData.data2;
-    InterruptData.data2     = InterruptData.data3;
-    InterruptData.data3     = InterruptData.data4;
-    InterruptData.data4     = InterruptData.data5;
-    InterruptData.data5     = InterruptData.data6;
-    InterruptData.data6     = InterruptData.data7;
-    InterruptData.data7     = InterruptData.data8;
-    InterruptData.data8     = InterruptData.data9;
-    InterruptData.data9     = InterruptData.data10;
-    InterruptData.data10    = InterruptData.data11;
-    InterruptData.data11    = InterruptData.data12;
-    InterruptData.data12    = InterruptData.data13;
-    InterruptData.data13    = DUMMY_DATA;
-}
+//void clearInterruptData(void) {
+//    InterruptData.data1     = DUMMY_DATA;
+//    InterruptData.data2     = DUMMY_DATA;
+//    InterruptData.data3     = DUMMY_DATA;
+//    InterruptData.data4     = DUMMY_DATA;
+//    InterruptData.data5     = DUMMY_DATA;
+//    InterruptData.data6     = DUMMY_DATA;
+//    InterruptData.data7     = DUMMY_DATA;
+//    InterruptData.data8     = DUMMY_DATA;
+//    InterruptData.data9     = DUMMY_DATA;
+//    InterruptData.data10    = DUMMY_DATA;
+//    InterruptData.data11    = DUMMY_DATA;
+//    InterruptData.data12    = DUMMY_DATA;
+//    InterruptData.data13    = DUMMY_DATA;
+//}
+//
+//void shiftInterruptData(void) {
+//    InterruptData.data1     = InterruptData.data2;
+//    InterruptData.data2     = InterruptData.data3;
+//    InterruptData.data3     = InterruptData.data4;
+//    InterruptData.data4     = InterruptData.data5;
+//    InterruptData.data5     = InterruptData.data6;
+//    InterruptData.data6     = InterruptData.data7;
+//    InterruptData.data7     = InterruptData.data8;
+//    InterruptData.data8     = InterruptData.data9;
+//    InterruptData.data9     = InterruptData.data10;
+//    InterruptData.data10    = InterruptData.data11;
+//    InterruptData.data11    = InterruptData.data12;
+//    InterruptData.data12    = InterruptData.data13;
+//    InterruptData.data13    = DUMMY_DATA;
+//}
 

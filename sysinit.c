@@ -3,13 +3,15 @@
 
 #include "UI.h"
 #include "interrupt.h"
+#include "ringbuffer.h"
 
 void SysInit(void) {
     PORTinit();
     SPIinit();
     UARTinit();
+    RingBufferInit();
 
-    clearInterruptData();
+//    clearInterruptData();
 
     // PLL (switch from 8 MHz to 16 MHz)
     // PLL enabled with CONFIG setting

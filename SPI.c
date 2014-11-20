@@ -4,8 +4,8 @@ void SPIinit(void) {
     // SPI Slave Mode
     SMP     =   0;          // Setting must be cleared in Slave Mode
 
-    CKP     =   0;          // Idle state for clock is LOW
-    CKE     =   1;          // Data stable on (0 falling, 1 rising) edge
+    CKP     =   0;  // CPOL // Idle state for clock is LOW
+    CKE     =   0;  // CPHA // Data stable on (0 falling, 1 rising) edge
 
     SSPM0   =   0;          // Synchronous Serial Port Mode
     SSPM1   =   0;          // "0100" = SPI Slave Mode,
@@ -16,9 +16,12 @@ void SPIinit(void) {
                             // configures SCK, SDI and SDO pins
     
     SSPIE   =   1;          // Enable interrupt on data receive
+
+    SPI_DATA_REG = 0x00;    // Clear Data register
 }
 
 unsigned char SPItransmit (unsigned char data) {
+//    while (BF == 0);
     unsigned char returnValue = SPI_DATA_REG;
     SPI_DATA_REG = data;
     return returnValue;

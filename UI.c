@@ -52,7 +52,7 @@ void updateButtons (void) {
     BUTTON_LOAD_PORT &= ~(BUTTON_LOAD_BIT);
 }
 
-unsigned char getButtonRegValue (unsigned char registerNr, unsigned char reset) {
+unsigned char getButtonRegValue (unsigned char registerNr) {
     if (!(registerNr > 0 && registerNr <= NR_OF_BUTTONS_REG)) {
         return 0;                           // RETURN //
     }
@@ -72,7 +72,7 @@ unsigned char getButtonRegValue (unsigned char registerNr, unsigned char reset) 
 
     for (counter = 0; counter < 8; counter ++) {
         returnValue |= button->value << 7 - counter;
-        if (button->mode == TOGGLED && reset) {
+        if (button->mode == TOGGLED) {
             button->value = 0;
         }
         button ++;
@@ -214,19 +214,11 @@ void updateRotaryEnc (unsigned char REnr) {
     RE->prevValB    = valB;
 }
 
-signed char getREvalue (unsigned char REnr, unsigned char reset) {
-    if (!(REnr > 0 && REnr <= NR_OF_ROTARYENC)) {
-        // Invalid Range
-        return 0;                               // RETURN //
-    }
-    
-    RotaryEncoder_t* RE = &UIinfo.RE_1 + REnr - 1;
+signed char getREvalue (unsigned char REnr) {   
+    RotaryEncoder_t* RE = &UIinfo.RE_1 + REnr;
 
     signed char returnValue = RE->value;
-
-    if (reset) {
-        RE->value = 0;
-    }
+    RE->value = 0;
 
     return returnValue;                         // RETURN //
 }

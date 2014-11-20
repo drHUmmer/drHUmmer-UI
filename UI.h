@@ -12,7 +12,7 @@
 // Button //
 ////////////
 void            updateButtons       (void);
-unsigned char   getButtonRegValue   (unsigned char registerNr, unsigned char reset);
+unsigned char   getButtonRegValue   (unsigned char registerNr);
 void            setButtonValue      (Buttons_t buttonNr, unsigned char value);
 void            setButtonMode       (Buttons_t buttonNr, ButtonMode_t mode);
 void            setButtonEdge       (Buttons_t buttonNr, Edge_t edgeMode);
@@ -24,7 +24,7 @@ void            resetButtons        (void);
 ////////////////////
 void            updateAllRotaryEnc  (void);
 void            updateRotaryEnc     (unsigned char REnr);
-signed char     getREvalue          (unsigned char REnr, unsigned char reset);
+signed char     getREvalue          (unsigned char REnr);
 void            resetREs            (void);
 
 #endif	// UI_H
