@@ -8,7 +8,10 @@ void interrupt MainInterrupt () {
         static unsigned char operation  = 0x00;
         static unsigned char remaining  = 0x00;
 
-        unsigned char rawData   = SPI_DATA_REG;//SPItransmit(0x00);
+        unsigned char rawData   = SPI_DATA_REG;
+
+        UARTsend(rawData);
+
         unsigned char address   = rawData & ADDR_MASK;
         unsigned char command   = rawData & COMMAND_MASK;
 
@@ -37,9 +40,9 @@ void interrupt MainInterrupt () {
                 }
                 break;  // 010
                 
-            case COMMAND_BUTT_EDGE      : command_butt_edge (address);      break;  // 100
-            case COMMAND_BUTT_MODE      : command_butt_mode (address);      break;  // 101
-            case COMMAND_RESET          : command_reset     ();             break;  // 111
+            case COMMAND_BUTT_EDGE  : command_butt_edge (address);  break;  // 100
+            case COMMAND_BUTT_MODE  : command_butt_mode (address);  break;  // 101
+            case COMMAND_RESET      : command_reset     ();         break;  // 111
         }
 
         if (remaining) {
@@ -60,10 +63,8 @@ void interrupt MainInterrupt () {
         else {
             SPI_DATA_REG = 0x00;
         }
-        
-        UARTsend(SPI_DATA_REG);     // DEBUG
-
-        SSPIF = 0;                  // Clear interrupt flag
     }
+
     PORTA &= ~(1<<7);           // Set debug pin    // DEBUG //
+    SSPIF   = 0;                // Clear interrupt flag
 }

@@ -4,7 +4,7 @@ void SPIinit(void) {
     // SPI Slave Mode
     SMP     =   0;          // Setting must be cleared in Slave Mode
 
-    CKP     =   0;  // CPOL // Idle state for clock is LOW
+    CKP     =   0;  // CPOL // Idle state for clock is (0 low, 1 high)
     CKE     =   0;  // CPHA // Data stable on (0 falling, 1 rising) edge
 
     SSPM0   =   0;          // Synchronous Serial Port Mode

@@ -13,6 +13,10 @@ int main() {
         updateAllRotaryEnc();   // Read all Rotary encoders
         updateButtons();        // Read all button
 
+//        UARTsend(0xAA);
+//        UARTsend(SSPSTAT);
+//        UARTsend(SSPCON);
+
     }
 
     return 1;

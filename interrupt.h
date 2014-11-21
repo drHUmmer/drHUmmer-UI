@@ -22,7 +22,7 @@
 #define COMMAND_RESET           (0b11100000)    // 111
 #define COMMAND_BUTT_GET        (0b00100000)    // 001
 #define COMMAND_RE_GET          (0b01000000)    // 010
-#define COMMAND_RE_GET_UPDATE   (0b01100000)    // 011
+//#define COMMAND_RE_GET_UPDATE   (0b01100000)    // 011
 #define COMMAND_BUTT_EDGE       (0b10000000)    // 100
 #define COMMAND_BUTT_MODE       (0b10100000)    // 101
 
