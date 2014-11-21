@@ -2,14 +2,14 @@
 
 void command_butt_edge (unsigned char address) {
     unsigned edge       = !!(address & 0x10);
-    address             &= (address - 1);
+    address             &= 0x0f;
 
     setButtonEdgeINT    (address, edge);
 }
 
 void command_butt_mode (unsigned char address) {
     unsigned mode       = !!(address & 0x10);
-    address             &= (address - 1);
+    address             &= 0x0f;
 
     setButtonModeINT    (address, mode);
 }

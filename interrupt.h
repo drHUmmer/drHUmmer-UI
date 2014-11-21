@@ -4,7 +4,9 @@
 #include <pic16f724.h>
 #include "interruptFunctions.h"
 #include "UI.h"
-
+#include "SPI.h"
+#include "UIinfo.h"
+#include "UART.h"
 // Command list         //
 // 111  RESET           
 // 000  Button

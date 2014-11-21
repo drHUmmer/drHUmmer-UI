@@ -1,7 +1,4 @@
 #include "interrupt.h"
-#include "SPI.h"
-#include "UIinfo.h"
-#include "UART.h"
 
 void interrupt MainInterrupt () {
     PORTA |= (1<<7);        // Set debug pin    // DEBUG //
@@ -10,7 +7,6 @@ void interrupt MainInterrupt () {
         static unsigned char counter    = 0x00;
         static unsigned char operation  = 0x00;
         static unsigned char remaining  = 0x00;
-
 
         unsigned char rawData   = SPI_DATA_REG;//SPItransmit(0x00);
         unsigned char address   = rawData & ADDR_MASK;
@@ -49,13 +45,13 @@ void interrupt MainInterrupt () {
         if (remaining) {
             switch (operation) {
                 case COMMAND_BUTT_GET:
-                    SPI_DATA_REG = getButtonRegValue(counter);
+                    SPI_DATA_REG = getButtonRegValue(counter - 1);
                     counter ++;
                     remaining --;
                     break;
                     
                 case COMMAND_RE_GET:
-                    SPI_DATA_REG = getREvalue(counter);
+                    SPI_DATA_REG = getREvalue(counter - 1);
                     counter ++;
                     remaining --;
                     break;
