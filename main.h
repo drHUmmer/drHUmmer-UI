@@ -7,11 +7,6 @@
 #include "UART.h"
 #include "interrupt.h"
 #include "UIinfo.h"
-
 #include "SPI.h"
-
-// Defines
-
-// Typedefs
 
 #endif // MAIN_H

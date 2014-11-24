@@ -2,7 +2,7 @@
 
 int main() {
     SysInit();
-    ButtonSettingSetup();       // Default button modes
+    ButtonSettingSetup();           // Default button modes
     
     while (1) {
         if (PORTD & (1<<3))
@@ -10,13 +10,8 @@ int main() {
         else
             PORTD |= (1<<3);        // Set debug pin
         
-        updateAllRotaryEnc();   // Read all Rotary encoders
-        updateButtons();        // Read all button
-
-//        UARTsend(0xAA);
-//        UARTsend(SSPSTAT);
-//        UARTsend(SSPCON);
-
+        updateAllRotaryEnc();       // Read all Rotary encoders
+        updateButtons();            // Read all button
     }
 
     return 1;

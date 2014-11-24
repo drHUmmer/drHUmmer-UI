@@ -26,7 +26,7 @@
 #define COMMAND_BUTT_EDGE       (0b10000000)    // 100
 #define COMMAND_BUTT_MODE       (0b10100000)    // 101
 
-void interrupt MainInterrupt (void);
+//void interrupt MainInterrupt (void);
 
 
 typedef struct {

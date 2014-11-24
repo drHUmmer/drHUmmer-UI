@@ -1,16 +1,14 @@
 #include "interrupt.h"
 
-void interrupt MainInterrupt () {
+static void interrupt MainInterrupt () {
     PORTA |= (1<<7);        // Set debug pin    // DEBUG //
-
-    if (SSPIE && SSPIF) {
+    
+    if (SSPIE && SSPIF) {        
         static unsigned char counter    = 0x00;
         static unsigned char operation  = 0x00;
         static unsigned char remaining  = 0x00;
 
         unsigned char rawData   = SPI_DATA_REG;
-
-        UARTsend(rawData);
 
         unsigned char address   = rawData & ADDR_MASK;
         unsigned char command   = rawData & COMMAND_MASK;
@@ -63,8 +61,8 @@ void interrupt MainInterrupt () {
         else {
             SPI_DATA_REG = 0x00;
         }
-    }
 
     PORTA &= ~(1<<7);           // Set debug pin    // DEBUG //
     SSPIF   = 0;                // Clear interrupt flag
+    }
 }

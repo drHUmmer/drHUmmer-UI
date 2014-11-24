@@ -14,7 +14,6 @@ typedef enum {
     FALLING
 } Edge_t;
 
-
 ////////////////////
 // Rotary Encoder //
 ////////////////////

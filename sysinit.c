@@ -1,6 +1,5 @@
 #include "sysinit.h"
 
-
 #include "UI.h"
 #include "interrupt.h"
 #include "ringbuffer.h"
@@ -9,9 +8,6 @@ void SysInit(void) {
     PORTinit();
     SPIinit();
     UARTinit();
-//    RingBufferInit();
-
-//    clearInterruptData();
 
     // PLL (switch from 8 MHz to 16 MHz)
     // PLL enabled with CONFIG setting
@@ -24,42 +20,42 @@ void SysInit(void) {
 }
 
 void ButtonSettingSetup (void) {
-    setButtonMode(BUTT_SEQ_1,   TOGGLED);
-    setButtonMode(BUTT_SEQ_2,   TOGGLED);
-    setButtonMode(BUTT_SEQ_3,   TOGGLED);
-    setButtonMode(BUTT_SEQ_4,   TOGGLED);
-    setButtonMode(BUTT_SEQ_5,   TOGGLED);
-    setButtonMode(BUTT_SEQ_6,   TOGGLED);
-    setButtonMode(BUTT_SEQ_7,   TOGGLED);
-    setButtonMode(BUTT_SEQ_8,   TOGGLED);
-    setButtonMode(BUTT_SEQ_9,   TOGGLED);
-    setButtonMode(BUTT_SEQ_10,  TOGGLED);
-    setButtonMode(BUTT_SEQ_11,  TOGGLED);
-    setButtonMode(BUTT_SEQ_12,  TOGGLED);
-    setButtonMode(BUTT_SEQ_13,  TOGGLED);
-    setButtonMode(BUTT_SEQ_14,  TOGGLED);
-    setButtonMode(BUTT_SEQ_15,  TOGGLED);
-    setButtonMode(BUTT_SEQ_16,  TOGGLED);
+    setButtonMode(BUTT_SEQ_1,       TOGGLED);
+    setButtonMode(BUTT_SEQ_2,       TOGGLED);
+    setButtonMode(BUTT_SEQ_3,       TOGGLED);
+    setButtonMode(BUTT_SEQ_4,       TOGGLED);
+    setButtonMode(BUTT_SEQ_5,       TOGGLED);
+    setButtonMode(BUTT_SEQ_6,       TOGGLED);
+    setButtonMode(BUTT_SEQ_7,       TOGGLED);
+    setButtonMode(BUTT_SEQ_8,       TOGGLED);
+    setButtonMode(BUTT_SEQ_9,       TOGGLED);
+    setButtonMode(BUTT_SEQ_10,      TOGGLED);
+    setButtonMode(BUTT_SEQ_11,      TOGGLED);
+    setButtonMode(BUTT_SEQ_12,      TOGGLED);
+    setButtonMode(BUTT_SEQ_13,      TOGGLED);
+    setButtonMode(BUTT_SEQ_14,      TOGGLED);
+    setButtonMode(BUTT_SEQ_15,      TOGGLED);
+    setButtonMode(BUTT_SEQ_16,      TOGGLED);
 
-    setButtonMode(BUTT_DRUM_1,  TOGGLED);
-    setButtonMode(BUTT_DRUM_2,  TOGGLED);
-    setButtonMode(BUTT_DRUM_3,  TOGGLED);
-    setButtonMode(BUTT_DRUM_4,  TOGGLED);
-    setButtonMode(BUTT_DRUM_5,  TOGGLED);
-    setButtonMode(BUTT_DRUM_6,  TOGGLED);
+    setButtonMode(BUTT_DRUM_1,      TOGGLED);
+    setButtonMode(BUTT_DRUM_2,      TOGGLED);
+    setButtonMode(BUTT_DRUM_3,      TOGGLED);
+    setButtonMode(BUTT_DRUM_4,      TOGGLED);
+    setButtonMode(BUTT_DRUM_5,      TOGGLED);
+    setButtonMode(BUTT_DRUM_6,      TOGGLED);
 
-    setButtonMode(BUTT_PLAY,    TOGGLED);
-    setButtonMode(BUTT_CLEAR,   TOGGLED);
-    setButtonMode(BUTT_SHIFT,   MOMENTARY);
-    setButtonMode(BUTT_FX,      TOGGLED);
+    setButtonMode(BUTT_PLAY,        TOGGLED);
+    setButtonMode(BUTT_CLEAR,       TOGGLED);
+    setButtonMode(BUTT_SHIFT,       MOMENTARY);
+    setButtonMode(BUTT_FX,          TOGGLED);
 
-    setButtonMode(BUTT_PATT_LEN, TOGGLED);
-    setButtonMode(BUTT_PATT_SEL, TOGGLED);
+    setButtonMode(BUTT_PATT_LEN,    TOGGLED);
+    setButtonMode(BUTT_PATT_SEL,    TOGGLED);
 
-    setButtonMode(BUTT_MENU_1,  TOGGLED);
-    setButtonMode(BUTT_MENU_2,  TOGGLED);
-    setButtonMode(BUTT_EXTRA_1, TOGGLED);
-    setButtonMode(BUTT_EXTRA_2, TOGGLED);
+    setButtonMode(BUTT_MENU_1,      TOGGLED);
+    setButtonMode(BUTT_MENU_2,      TOGGLED);
+    setButtonMode(BUTT_EXTRA_1,     TOGGLED);
+    setButtonMode(BUTT_EXTRA_2,     TOGGLED);
 }
 
 void PORTinit(void) {
