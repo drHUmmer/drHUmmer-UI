@@ -5,12 +5,12 @@
 // Button //
 ////////////
 void setButtonValue (Buttons_t buttonNr, unsigned char value) {
-    if (!(buttonNr >= 0 && buttonNr < 8 * NR_OF_BUTTONS_REG)) {
+    if (!(buttonNr > 0 && buttonNr <= 8 * NR_OF_BUTTONS_REG)) {
         return;                             // RETURN //
     }
     Button_t* button = &UIinfo.Butt_1;
 
-    button += buttonNr;                     // Jump to correct button address
+    button += (buttonNr - 1);                     // Jump to correct button address
 
     // Momentary
     if (button->mode == MOMENTARY) {
@@ -42,7 +42,7 @@ void updateButtons (void) {
 
     unsigned char counter = 0;
     for (counter = 0; counter < NR_OF_BUTTONS_REG * 8; counter ++) {
-        setButtonValue(counter, !!(BUTTON_IN_PORT & BUTTON_IN_BIT));
+        setButtonValue(counter + 1, !!(BUTTON_IN_PORT & BUTTON_IN_BIT));
 
         // Clock pulse
         BUTTON_CLOCK_PORT |= BUTTON_CLOCK_BIT;
@@ -69,13 +69,12 @@ unsigned char getButtonRegValue (unsigned char registerNr) {
         default:                return 0;   // RETURN //
     }
 
-
     for (counter = 0; counter < 8; counter ++) {
-        returnValue |= button->value << 7 - counter;
+        returnValue |= (button->value << (7 - counter));
         if (button->mode == TOGGLED) {
             button->value = 0;
         }
-        button ++;
+        button ++;                          // Select next button
     }
 
     return returnValue;                     // RETURN //

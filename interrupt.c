@@ -3,7 +3,9 @@
 static void interrupt MainInterrupt () {
     PORTA |= (1<<7);        // Set debug pin    // DEBUG //
     
-    if (SSPIE && SSPIF) {        
+    if (SSPIE && SSPIF) {
+        unsigned char result            = 0x00;
+
         static unsigned char counter    = 0x00;
         static unsigned char operation  = 0x00;
         static unsigned char remaining  = 0x00;
@@ -14,7 +16,7 @@ static void interrupt MainInterrupt () {
         unsigned char command   = rawData & COMMAND_MASK;
 
         switch (command) {
-            case COMMAND_BUTT_GET : 
+            case COMMAND_BUTT_GET :
                 operation = COMMAND_BUTT_GET;
                 if (address) {
                     remaining   = 1;
@@ -26,7 +28,7 @@ static void interrupt MainInterrupt () {
                 }
             break;  // 001
 
-            case COMMAND_RE_GET : 
+            case COMMAND_RE_GET :
                 operation = COMMAND_RE_GET;
                 if (address) {
                     remaining   = 1;
@@ -38,21 +40,23 @@ static void interrupt MainInterrupt () {
                 }
                 break;  // 010
                 
-            case COMMAND_BUTT_EDGE  : command_butt_edge (address);  break;  // 100
-            case COMMAND_BUTT_MODE  : command_butt_mode (address);  break;  // 101
+            //case COMMAND_BUTT_EDGE  : command_butt_edge (address);  break;  // 100
+            //case COMMAND_BUTT_MODE  : command_butt_mode (address);  break;  // 101
             case COMMAND_RESET      : command_reset     ();         break;  // 111
         }
 
         if (remaining) {
             switch (operation) {
                 case COMMAND_BUTT_GET:
-                    SPI_DATA_REG = getButtonRegValue(counter - 1);
+                    result = getButtonRegValue(counter);
+                    SPI_DATA_REG = result;
                     counter ++;
                     remaining --;
                     break;
                     
                 case COMMAND_RE_GET:
-                    SPI_DATA_REG = getREvalue(counter - 1);
+                    result = getREvalue(counter - 1);
+                    SPI_DATA_REG = result;
                     counter ++;
                     remaining --;
                     break;
@@ -62,7 +66,9 @@ static void interrupt MainInterrupt () {
             SPI_DATA_REG = 0x00;
         }
 
-    PORTA &= ~(1<<7);           // Set debug pin    // DEBUG //
+        UARTsend(SPI_DATA_REG);
+
+    PORTA &= ~(1<<7);           // Clear debug pin    // DEBUG //
     SSPIF   = 0;                // Clear interrupt flag
     }
 }
